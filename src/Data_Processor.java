@@ -5,6 +5,6 @@
  */
 public interface Data_Processor {
 
-    public abstract byte[] generate_Data(byte[] source_Data);
+    public abstract int[] generate_Data(int[] source_Data);
 
 }

@@ -37,6 +37,8 @@ public class Data_Reader_Test {
      */
     public boolean test_Start(){
 
+        logger.log(Level.INFO,"读取器测试开始");
+
         if(data_Reader_To_Test.run_Reader()<0){
             return false;
         }
