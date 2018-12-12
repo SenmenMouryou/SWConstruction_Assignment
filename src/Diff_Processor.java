@@ -18,7 +18,7 @@ public class Diff_Processor implements Data_Processor {
         int[] diff_Data = new int[data_Length];
 
         for(int i=0; i<data_Length-1; i++){
-            diff_Data[i] = source_Data[i]-source_Data[i+1];
+            diff_Data[i] = source_Data[i+1]-source_Data[i];
         }
         //末位处理
         diff_Data[data_Length-1] = diff_Data[data_Length-2];

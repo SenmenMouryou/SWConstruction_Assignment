@@ -19,6 +19,10 @@ public class Data_Processor_Test {
 
         boolean result = test_Diff() && test_Sec_Diff() && test_Intgr();
 
+        if(result){
+            logger.log(Level.INFO,"数据处理器测试完成，全部测试通过");
+        }
+
         return result;
     }
 
@@ -60,7 +64,7 @@ public class Data_Processor_Test {
         int[] diff_Data_Test = data_processor.generate_Data(Byte_Array_To_Int.byte_Array_To_Int(source_Data_Tested));
 
         for(int i=0; i<DATA_LENGTH-1; i++){
-            if(diff_Data_Test[i] != source_Data_Tested[i]- source_Data_Tested[i-1]){
+            if(diff_Data_Test[i] != source_Data_Tested[i+1]- source_Data_Tested[i]){
                 logger.log(Level.WARNING,"一阶微分测试出错:从第"+i+"个数据起结果错误");
                 return false;
             }
@@ -113,7 +117,7 @@ public class Data_Processor_Test {
         data_processor = new Intgr_Processor();
         int[] intgr_Test = data_processor.generate_Data(Byte_Array_To_Int.byte_Array_To_Int(source_Data_Tested));
 
-        for(int i=0; i<DATA_LENGTH+1; i++){
+        for(int i=0; i<DATA_LENGTH-1; i++){
             if(intgr_Test[i] != source_Data_Tested[i]+source_Data_Tested[i+1]){
                 logger.log(Level.WARNING,"一阶积分测试出错:从第"+i+"个数据起结果错误");
                 return false;

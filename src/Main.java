@@ -8,10 +8,13 @@ public class Main {
     private static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        Main_Window window = new Main_Window();
+//        Main_Window window = new Main_Window();
 
 //        Data_Reader_Test test = new Data_Reader_Test();
 //        test.test_Start();
+
+        Data_Processor_Test test = new Data_Processor_Test();
+        test.test_Start();
 
 //        test_IO();
 
