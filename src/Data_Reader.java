@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class Data_Reader {
     //日志类
-    Logger logger = Logger.getLogger(Data_Reader.class.getName());
+    private Logger logger = Logger.getLogger(Data_Reader.class.getName());
 
     //将打开的文件名
     private String file_Name = null;

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
  */
 public class Data_Processor_Test {
     //日志类·
-    Logger logger = Logger.getLogger(Data_Processor_Test.class.getName());
+    private Logger logger = Logger.getLogger(Data_Processor_Test.class.getName());
 
     private Data_Processor data_processor = null;
     private final int DATA_LENGTH = 1000;

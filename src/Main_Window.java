@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class Main_Window extends JFrame {
     //日志类
-    private static Logger logger = Logger.getLogger(Main_Window.class.getName());
+    private Logger logger = Logger.getLogger(Main_Window.class.getName());
 
     //文件名
     private String filename = "";
@@ -35,6 +35,8 @@ public class Main_Window extends JFrame {
             logger.log(Level.SEVERE,"配置文件加载失败！");
             this.setSize(640,480);//默认窗口大小
         }
+        //固定窗口大小
+        this.setResizable(false);
         //窗口居中
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         int loc_X = (int)(toolkit.getScreenSize().getWidth()-this.getWidth())/2;

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
  */
 public class Diff_Processor implements Data_Processor {
     //日志类
-    Logger logger = Logger.getLogger(Diff_Processor.class.getName());
+    private Logger logger = Logger.getLogger(Diff_Processor.class.getName());
 
     @Override
     public int[] generate_Data(int[] source_Data) {
