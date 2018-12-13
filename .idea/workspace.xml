@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08abe719-3f3f-4f48-a16a-e8786961de71" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Default_Package/Chart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Chart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Default_Package/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,11 +17,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Default_Package/Chart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
+            <state relative-caret-position="391">
+              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2066#2067#0" expanded="true" />
+                <element signature="e#2002#2003#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -214,7 +211,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544664702947" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544666507099" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -266,18 +263,18 @@
       <updated>1544595142348</updated>
       <workItem from="1544595144062" duration="141000" />
       <workItem from="1544595323234" duration="18440000" />
-      <workItem from="1544661612157" duration="3163000" />
+      <workItem from="1544661612157" duration="4847000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21744000" />
+    <option name="totallyTimeSpent" value="23428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18347639" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18347639" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -286,7 +283,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32924107" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32700893" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32700893" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -294,7 +291,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3236607" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3236607" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32924107" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -452,11 +449,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Default_Package/Chart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
+        <state relative-caret-position="391">
+          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2066#2067#0" expanded="true" />
+            <element signature="e#2002#2003#0" expanded="true" />
           </folding>
         </state>
       </provider>

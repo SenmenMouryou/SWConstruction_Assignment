@@ -15,19 +15,7 @@ public class Chart {
     //日志类
     private Logger logger = Logger.getLogger(Chart.class.getName());
 
-    //显示数据点的横向间距
-    private int space_Between_Points = 5;
-
-    //允许显示的数据长度
-    private int print_Data_Length=0;{
-    //预置允许显示的数据长度为窗口宽度/显示数据点的横向间距
-        try {
-            int window_width = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
-            print_Data_Length = window_width/space_Between_Points;
-        } catch (IOException e) {
-            logger.log(Level.SEVERE,"配置文件加载出错",e);
-        }
-    }
+    /************************数据数组*************************/
 
     //原始数据数组
     private int[] data_Array_Origin = null;
@@ -40,20 +28,15 @@ public class Chart {
     }
 
     //生成数组的长度
-    private int data_Generate_length = 1000;{
-        if(data_Array_Origin.length < 1000){
-            data_Generate_length = data_Array_Origin.length;
-        }
-        else {
-            data_Generate_length = 1000;
-        }
-    }
+    private int data_Generate_Length = 1000;
     //生成数组
-    private int[] data_Array_Generate = new int[data_Generate_length];
+    private int[] data_Array_Generate = new int[data_Generate_Length];
+
+    /************************显示设置*************************/
 
     //生成数组显示的起始位置
     private int data_Index_Start_To_Print = 0;
-    public void setData_Index_Start_To_Print(int data_Index_Start_To_Print) {
+    public void set_Data_Index_Start_To_Print(int data_Index_Start_To_Print) {
         if(data_Index_Start_To_Print>= data_Array_Origin.length && data_Array_Origin !=null){
             logger.log(Level.WARNING,"无效的起始绘制点");
             return;
@@ -65,9 +48,23 @@ public class Chart {
         this.data_Index_Start_To_Print = data_Index_Start_To_Print;
     }
 
+    //显示数据点的横向间距
+    private int space_Between_Points = 5;
+
+    //允许显示的数据长度
+    private int print_Data_Length=0;{
+        //预置允许显示的数据长度为窗口宽度/显示数据点的横向间距
+        try {
+            int window_width = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
+            print_Data_Length = window_width/space_Between_Points;
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"配置文件加载出错",e);
+        }
+    }
+
     //绘制缩放比例
     private double print_Scale = 1.0;
-    public void setPrint_Scale(int print_Scale) {
+    public void set_Print_Scale(int print_Scale) {
         this.print_Scale = print_Scale;
     }
 
@@ -82,10 +79,12 @@ public class Chart {
         //更新绘制起始点与缩放比例
         this.data_Index_Start_To_Print = data_Index_Start_To_Print;
         this.print_Scale = reduce_Scale;
+        //生成数组的显示域
+        int[] print_Frame = {data_Index_Start_To_Print, data_Index_Start_To_Print + print_Data_Length};
 
         //计算重绘的生成数组
         logger.log(Level.INFO,"计算重绘的生成数组");
-        caculate_Data_Print();
+        form_Data_Array_Generate();
 
 //        MMMMM
         logger.log(Level.INFO,"重绘图表");
@@ -97,16 +96,38 @@ public class Chart {
      */
     private void caculate_Data_Print(){
 
-        int start_Point = this.data_Index_Start_To_Print;
-        double scale = this.print_Scale;
-        //生成数组的显示域
-        int[] print_Frame = {start_Point,start_Point+print_Data_Length};
-        //初始化变形器
-        Data_Array_Transformer transformer = new Data_Array_Magnify();
+        //初始化生成数组
+        form_Data_Array_Generate();
+
 
 //        MMMMM
 
-        logger.log(Level.INFO,"新的绘制数组计算完成");
+    }
+
+    /**
+     * 通过原始数据和显示设置计算得到生成数组
+     */
+    private void form_Data_Array_Generate() {
+
+        //通过原始数据计算生成数组原型
+        for(int i = 0; i < data_Generate_Length; i++){
+            if(data_Index_Start_To_Print+i < data_Array_Origin.length){
+                data_Array_Generate[i] = data_Array_Origin[data_Index_Start_To_Print+i];
+            }
+            else{
+                data_Array_Generate[i] = 0;
+            }
+        }
+
+        //根据缩放比例缩放生成数组原型
+        //初始化变形器
+        Data_Array_Transformer transformer = new Data_Array_Magnify();
+        data_Array_Generate = transformer.data_Array_Trans(data_Array_Generate, (int)(print_Scale*10));
+        transformer = new Data_Array_Shrink();
+        data_Array_Generate = transformer.data_Array_Trans(data_Array_Generate, 10);
+
+        logger.log(Level.INFO,"已重新计算绘制数组");
 
     }
+
 }
