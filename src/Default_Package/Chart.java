@@ -58,7 +58,7 @@ public class Chart {
             logger.log(Level.WARNING,"无效的起始绘制点");
             return;
         }
-        else if(data_Array_Origin ==null){
+        else if(data_Array_Origin == null){
             logger.log(Level.WARNING,"尚未设置原始数组");
             return;
         }
