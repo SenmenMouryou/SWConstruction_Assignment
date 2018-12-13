@@ -1,4 +1,4 @@
-package Default_Package;
+package My_Chart_Main;
 
 import java.awt.*;
 import java.io.IOException;
@@ -27,18 +27,18 @@ public class Chart {
         }
     }
 
-    //生成数组的长度
-    private int data_Generate_Length = 1000;
+    //默认的生成数组的长度
+    private final int DEFAULT_DATA_GENERATE_LENGTH = 1000;
     //生成数组
-    private int[] data_Array_Generate = new int[data_Generate_Length];
+    private int[] data_Array_Generate = new int[DEFAULT_DATA_GENERATE_LENGTH];
 
     /************************显示设置*************************/
 
-    //生成数组显示的起始位置
+    //生成数组显示起始索引
     private int data_Index_Start_To_Print = 0;
     public void set_Data_Index_Start_To_Print(int data_Index_Start_To_Print) {
         if(data_Index_Start_To_Print>= data_Array_Origin.length && data_Array_Origin !=null){
-            logger.log(Level.WARNING,"无效的起始绘制点");
+            logger.log(Level.WARNING,"显示起始索引设置失败：超出范围");
             return;
         }
         else if(data_Array_Origin == null){
@@ -64,44 +64,46 @@ public class Chart {
 
     //绘制缩放比例
     private double print_Scale = 1.0;
-    public void set_Print_Scale(int print_Scale) {
-        this.print_Scale = print_Scale;
+    private final double MAX_PRINT_SCALE = 3.0;
+    public void set_Print_Scale(double print_Scale) {
+        if(print_Scale > 0 && print_Scale < MAX_PRINT_SCALE){
+            this.print_Scale = print_Scale;
+        }
+        else{
+            logger.log(Level.WARNING,"缩放比例设置失败：超出范围");
+        }
     }
 
     /**
-     * 重新绘制曲线
-     * @param data_Index_Start_To_Print 新的绘制起始点
-     * @param reduce_Scale  新的绘制缩放比例
+     * 重新绘制曲线，更新其缩放比例
+     * @param print_Scale  新的绘制缩放比例
      * @param canvas 需要重绘的画布
      */
-    public void repaint(int data_Index_Start_To_Print, double reduce_Scale, Canvas canvas){
+    public void repaint(double print_Scale, Canvas canvas){
 
-        //更新绘制起始点与缩放比例
-        this.data_Index_Start_To_Print = data_Index_Start_To_Print;
-        this.print_Scale = reduce_Scale;
-        //生成数组的显示域
-        int[] print_Frame = {data_Index_Start_To_Print, data_Index_Start_To_Print + print_Data_Length};
+        //更新绘制缩放比例
+        set_Print_Scale(print_Scale);
 
         //计算重绘的生成数组
         logger.log(Level.INFO,"计算重绘的生成数组");
         form_Data_Array_Generate();
 
-//        MMMMM
-        logger.log(Level.INFO,"重绘图表");
+        logger.log(Level.INFO,"已重绘图表");
 
     }
 
     /**
-     * 计算新的绘制数组
+     * 重新绘制曲线，更新其显示起始点索引
+     * @param data_Index_Start_To_Print 新的显示起始索引
+     * @param canvas 需要重绘的画布
      */
-    private void caculate_Data_Print(){
+    public void repaint(int data_Index_Start_To_Print, Canvas canvas){
 
-        //初始化生成数组
-        form_Data_Array_Generate();
+        //更新绘制起始索引
+        set_Data_Index_Start_To_Print(data_Index_Start_To_Print);
 
-
-//        MMMMM
-
+        MMM
+        logger.log(Level.INFO,"已重绘图表");
     }
 
     /**
@@ -110,7 +112,7 @@ public class Chart {
     private void form_Data_Array_Generate() {
 
         //通过原始数据计算生成数组原型
-        for(int i = 0; i < data_Generate_Length; i++){
+        for(int i = 0; i < DEFAULT_DATA_GENERATE_LENGTH; i++){
             if(data_Index_Start_To_Print+i < data_Array_Origin.length){
                 data_Array_Generate[i] = data_Array_Origin[data_Index_Start_To_Print+i];
             }

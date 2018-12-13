@@ -1,7 +1,6 @@
-package Default_Package;
+package My_Chart_Main;
 
 import java.io.*;
-import java.net.URL;
 import java.util.Properties;
 
 /**

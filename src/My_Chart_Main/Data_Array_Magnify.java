@@ -1,4 +1,4 @@
-package Default_Package;
+package My_Chart_Main;
 
 /**
  * @author SENMEN

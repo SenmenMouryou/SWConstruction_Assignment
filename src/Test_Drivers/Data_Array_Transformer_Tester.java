@@ -1,8 +1,8 @@
 package Test_Drivers;
 
-import Default_Package.Data_Array_Magnify;
-import Default_Package.Data_Array_Shrink;
-import Default_Package.Data_Array_Transformer;
+import My_Chart_Main.Data_Array_Magnify;
+import My_Chart_Main.Data_Array_Shrink;
+import My_Chart_Main.Data_Array_Transformer;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
