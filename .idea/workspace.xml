@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08abe719-3f3f-4f48-a16a-e8786961de71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyChart.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MyChart.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/settings.property" beforeDir="false" afterPath="$PROJECT_DIR$/Resource/settings.property" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Byte_Array_To_Int.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Byte_Array_To_Int.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Chart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Chart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data_Array_Magnify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data_Array_Shrink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data_Array_Transformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Array_Transformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data_Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Processor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data_Processor_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test_Drivers/Data_Processor_Tester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data_Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Reader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data_Reader_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test_Drivers/Data_Reader_Tester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Diff_Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Diff_Processor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Intgr_Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Intgr_Processor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main_Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Main_Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Property_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Property_Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sec_Diff_Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Sec_Diff_Processor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default_Package/Chart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Chart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default_Package/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default_Package/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,14 +17,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Default_Package/Chart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
-              <caret line="97" column="72" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
+            <state relative-caret-position="312">
+              <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#setData_Index_Start_To_Print#0;class#Chart#0" />
+                <element signature="e#2066#2067#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -57,17 +42,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="31" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="31" />
+            <state relative-caret-position="141">
+              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+            <state relative-caret-position="274">
+              <caret line="112" column="14" lean-forward="true" selection-start-line="112" selection-start-column="14" selection-end-line="112" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -87,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+            <state relative-caret-position="350">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -96,7 +81,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Test_Drivers/Data_Processor_Tester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
+            <state relative-caret-position="502">
               <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -108,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Default_Package/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="361">
+              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -117,7 +102,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Test_Drivers/Data_Reader_Tester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="19">
               <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -164,7 +149,11 @@
         <option value="$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Test.java" />
         <option value="$PROJECT_DIR$/src/Test_Drivers/Data_Processor_Tester.java" />
         <option value="$PROJECT_DIR$/src/Test_Drivers/Data_Tester.java" />
+        <option value="$PROJECT_DIR$/src/Default_Package/Main.java" />
+        <option value="$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java" />
         <option value="$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java" />
+        <option value="$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java" />
+        <option value="$PROJECT_DIR$/src/Default_Package/Chart.java" />
       </list>
     </option>
   </component>
@@ -225,7 +214,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544631931627" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544664702947" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -277,12 +266,12 @@
       <updated>1544595142348</updated>
       <workItem from="1544595144062" duration="141000" />
       <workItem from="1544595323234" duration="18440000" />
-      <workItem from="1544661612157" duration="212000" />
+      <workItem from="1544661612157" duration="3163000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18793000" />
+    <option name="totallyTimeSpent" value="21744000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -297,7 +286,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32924107" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32700893" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32700893" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -307,7 +296,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3236607" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32998884" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32924107" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -396,28 +385,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Test_Drivers/Data_Tester.java" />
-    <entry file="file://$PROJECT_DIR$/src/Default_Package/Chart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="97" column="72" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setData_Index_Start_To_Print#0;class#Chart#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Default_Package/Data_Array_Transformer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="39" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -428,16 +399,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java">
+    <entry file="file://$PROJECT_DIR$/src/Default_Package/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        <state relative-caret-position="361">
+          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Default_Package/Data_Array_Magnify.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Test_Drivers/Data_Processor_Tester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
+        <state relative-caret-position="502">
           <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -445,16 +423,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Default_Package/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Test_Drivers/Data_Reader_Tester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state relative-caret-position="19">
           <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -464,10 +435,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Test_Drivers/Data_Array_Transformer_Tester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+        <state relative-caret-position="274">
+          <caret line="112" column="14" lean-forward="true" selection-start-line="112" selection-start-column="14" selection-end-line="112" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Default_Package/Data_Array_Shrink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Default_Package/Chart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2066#2067#0" expanded="true" />
           </folding>
         </state>
       </provider>
