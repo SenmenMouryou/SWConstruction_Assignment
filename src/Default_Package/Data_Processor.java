@@ -1,3 +1,5 @@
+package Default_Package;
+
 /**
  * @author SENMEN
  * 数据处理器接口

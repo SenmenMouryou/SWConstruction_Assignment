@@ -1,3 +1,5 @@
+package Default_Package;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -23,7 +25,7 @@ public class Main_Window extends JFrame {
     }
 
     public Main_Window() throws HeadlessException {
-        this.setTitle("My Chart");
+        this.setTitle("My Default_Package.Chart");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //设置窗口大小

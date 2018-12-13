@@ -1,3 +1,5 @@
+package Default_Package;
+
 /**
  * @author SENMEN
  * 将byte类型数组转化为整型数组的工具类

@@ -1,3 +1,7 @@
+package Test_Drivers;
+
+import Default_Package.*;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -5,9 +9,9 @@ import java.util.logging.Logger;
  * @author SENMEN
  * 数据处理器的测试类
  */
-public class Data_Processor_Test {
+public class Data_Processor_Tester {
     //日志类·
-    private Logger logger = Logger.getLogger(Data_Processor_Test.class.getName());
+    private Logger logger = Logger.getLogger(Data_Processor_Tester.class.getName());
 
     private Data_Processor data_processor = null;
     private final int DATA_LENGTH = 1000;
@@ -127,6 +131,5 @@ public class Data_Processor_Test {
         logger.log(Level.INFO,"一阶积分测试通过");
         return true;
     }
-
 
 }

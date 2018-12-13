@@ -1,3 +1,7 @@
+package Test_Drivers;
+
+import Default_Package.Data_Reader;
+
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -6,9 +10,9 @@ import java.util.logging.Logger;
  * @author SENMEN
  * 数据读取器的测试用例
  */
-public class Data_Reader_Test {
+public class Data_Reader_Tester {
     //日志类
-    private static Logger logger = Logger.getLogger(Data_Reader_Test.class.getName());
+    private static Logger logger = Logger.getLogger(Data_Reader_Tester.class.getName());
 
     private static final int DATA_LENGTH = 10000000;
 
@@ -20,7 +24,7 @@ public class Data_Reader_Test {
     //将被测试的读取器
     private Data_Reader data_Reader_To_Test;
 
-    public Data_Reader_Test(){
+    public Data_Reader_Tester(){
         init_Data();
         write_Data_To_File();
         assert check_Data_Written()==true;

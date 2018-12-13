@@ -1,3 +1,5 @@
+package Default_Package;
+
 /**
  * @author SENMEN
  * 曲线生成的驱动类
