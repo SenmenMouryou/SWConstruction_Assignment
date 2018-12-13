@@ -33,34 +33,38 @@ public class Chart {
     private int[] data_Array_Generate = new int[DEFAULT_DATA_GENERATE_LENGTH];
 
     /************************显示设置*************************/
+    //窗口宽度
+    private int WINDOW_WIDTH = 0;{
+        try {
+            WINDOW_WIDTH = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"配置文件加载出错",e);
+        }
+    }
 
-    //生成数组显示起始索引
-    private int data_Index_Start_To_Print = 0;
-    public void set_Data_Index_Start_To_Print(int data_Index_Start_To_Print) {
-        if(data_Index_Start_To_Print>= data_Array_Origin.length && data_Array_Origin !=null){
-            logger.log(Level.WARNING,"显示起始索引设置失败：超出范围");
+    //生成数组起始对应原始数组的索引
+    private int origin_Index_To_Generate_Start = 0;
+    public void set_Origin_Index_To_Generate_Start(int origin_Index_To_Generate_Start) {
+        if(origin_Index_To_Generate_Start < 0){
+            logger.log(Level.WARNING,"生成数组起始索引设置失败：超出范围");
+            return;
+        }
+        else if(origin_Index_To_Generate_Start >= data_Array_Origin.length && data_Array_Origin !=null){
+            logger.log(Level.WARNING,"生成数组起始索引设置失败：超出范围");
             return;
         }
         else if(data_Array_Origin == null){
             logger.log(Level.WARNING,"尚未设置原始数组");
             return;
         }
-        this.data_Index_Start_To_Print = data_Index_Start_To_Print;
+        this.origin_Index_To_Generate_Start = origin_Index_To_Generate_Start;
     }
 
     //显示数据点的横向间距
     private int space_Between_Points = 5;
 
     //允许显示的数据长度
-    private int print_Data_Length=0;{
-        //预置允许显示的数据长度为窗口宽度/显示数据点的横向间距
-        try {
-            int window_width = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
-            print_Data_Length = window_width/space_Between_Points;
-        } catch (IOException e) {
-            logger.log(Level.SEVERE,"配置文件加载出错",e);
-        }
-    }
+    private int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
 
     //绘制缩放比例
     private double print_Scale = 1.0;
@@ -88,21 +92,39 @@ public class Chart {
         logger.log(Level.INFO,"计算重绘的生成数组");
         form_Data_Array_Generate();
 
+
+
         logger.log(Level.INFO,"已重绘图表");
 
     }
 
     /**
-     * 重新绘制曲线，更新其显示起始点索引
-     * @param data_Index_Start_To_Print 新的显示起始索引
+     * 重新绘制曲线，若超出生成数组范围则更新其显示起始点索引
+     * @param generate_Index_Start_Paint 开始显示生成数组的索引
      * @param canvas 需要重绘的画布
      */
-    public void repaint(int data_Index_Start_To_Print, Canvas canvas){
+    public void repaint(int generate_Index_Start_Paint, Canvas canvas){
+
+        //判断是否需要重新计算生成数组
+        if(generate_Index_Start_Paint >= 0 &&
+                generate_Index_Start_Paint < data_Array_Generate.length) {
+            //不需要重新计算生成数组：新的显示域仍在生成数组范围内
+
+            //重绘画布
+
+        }
+        else{
+            //需要重新计算生成数组
+            //重置生成数组起始对应原始数组的索引
+            set_Origin_Index_To_Generate_Start(generate_Index_Start_Paint + origin_Index_To_Generate_Start);
+            //重新计算生成数组
+            form_Data_Array_Generate();
+
+            //重绘画布
+
+        }
 
         //更新绘制起始索引
-        set_Data_Index_Start_To_Print(data_Index_Start_To_Print);
-
-        MMM
         logger.log(Level.INFO,"已重绘图表");
     }
 
@@ -113,8 +135,8 @@ public class Chart {
 
         //通过原始数据计算生成数组原型
         for(int i = 0; i < DEFAULT_DATA_GENERATE_LENGTH; i++){
-            if(data_Index_Start_To_Print+i < data_Array_Origin.length){
-                data_Array_Generate[i] = data_Array_Origin[data_Index_Start_To_Print+i];
+            if(origin_Index_To_Generate_Start +i < data_Array_Origin.length){
+                data_Array_Generate[i] = data_Array_Origin[origin_Index_To_Generate_Start +i];
             }
             else{
                 data_Array_Generate[i] = 0;
@@ -122,7 +144,6 @@ public class Chart {
         }
 
         //根据缩放比例缩放生成数组原型
-        //初始化变形器
         Data_Array_Transformer transformer = new Data_Array_Magnify();
         data_Array_Generate = transformer.data_Array_Trans(data_Array_Generate, (int)(print_Scale*10));
         transformer = new Data_Array_Shrink();
