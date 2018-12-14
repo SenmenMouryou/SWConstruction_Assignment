@@ -19,6 +19,7 @@ public class Channel_Panel extends JPanel {
     private Chart_Panel chart_Panel = null;
     public void set_Chart_Panel(Chart_Panel chart_Panel){
         this.chart_Panel = chart_Panel;
+        this.add(this.chart_Panel, BorderLayout.CENTER);
     }
 
     /**
@@ -34,8 +35,7 @@ public class Channel_Panel extends JPanel {
         super.paint(g);
         //绘制图表
         if(this.chart_Panel != null){
-            MMMM
-            this.add(this.chart_Panel,"");
+//            MMMM
             this.chart_Panel.paint(g);
         }
     }

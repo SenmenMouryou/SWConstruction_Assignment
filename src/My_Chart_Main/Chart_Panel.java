@@ -29,7 +29,7 @@ public class Chart_Panel extends JPanel {
     }
 
     //纵向缩放比例
-    private final int scale_Y = 2;
+    private double scale_Y = 2;
 
     /**
      * 图表绘制面板的构造器
@@ -45,8 +45,8 @@ public class Chart_Panel extends JPanel {
         super.paint(g);
 
         for(int i = 0; i < data.length-1; i++){
-            g.drawLine(i*space_Between_Points, data[i]/scale_Y + Byte.MAX_VALUE,
-                    (i+1)*space_Between_Points, data[i+1]/scale_Y + Byte.MAX_VALUE);
+            g.drawLine(i*space_Between_Points, (int)((data[i] + Byte.MAX_VALUE)/scale_Y),
+                    (i+1)*space_Between_Points, (int)((data[i+1] + Byte.MAX_VALUE)/scale_Y);
         }
 
     }
