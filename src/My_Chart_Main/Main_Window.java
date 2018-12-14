@@ -49,10 +49,36 @@ public class Main_Window extends JFrame {
         Main_Menu_Bar menuBar = new Main_Menu_Bar();
         this.setJMenuBar(menuBar);
 
+        test_Canvas();
 
         //显示窗口
 //      this.pack();
         this.setVisible(true);
+    }
+
+    private void test_Canvas() {
+        int[] data = new int[100];
+        for(int i=0;i<data.length;i++){
+            if(i%2==0){
+                data[i] = i;
+            }
+            else {
+                data[i] = -1*i;
+            }
+        }
+
+        Chart_Panel panel1 = new Chart_Panel(data);
+        Chart_Panel panel2 = new Chart_Panel(data);
+        Chart_Panel panel3 = new Chart_Panel(data);
+        Chart_Panel panel4 = new Chart_Panel(data);
+
+        this.getContentPane().setLayout(new GridLayout(4,1));
+        this.getContentPane().add(panel1);
+        this.getContentPane().add(panel2);
+        this.getContentPane().add(panel3);
+        this.getContentPane().add(panel4);
+
+
     }
 
     /**

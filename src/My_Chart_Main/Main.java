@@ -2,6 +2,7 @@ package My_Chart_Main;
 
 import Test_Drivers.Data_Array_Transformer_Tester;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +13,7 @@ public class Main {
     private static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-//        My_Chart_Main.Main_Window window = new My_Chart_Main.Main_Window();
+        My_Chart_Main.Main_Window window = new My_Chart_Main.Main_Window();
 
 //        Test_Drivers.Data_Reader_Tester test = new Test_Drivers.Data_Reader_Tester();
 //        test.test_Start();
@@ -20,8 +21,8 @@ public class Main {
 //        Data_Processor_Tester test = new Data_Processor_Tester();
 //        test.test_Start();
 
-        Data_Array_Transformer_Tester test = new Data_Array_Transformer_Tester();
-        test.test_Start();
+//        Data_Array_Transformer_Tester test = new Data_Array_Transformer_Tester();
+//        test.test_Start();
 
 //        test_IO();
 

@@ -7,6 +7,6 @@ package My_Chart_Main;
  */
 public interface Data_Processor {
 
-    public abstract int[] generate_Data(int[] source_Data);
+    int[] generate_Data(int[] source_Data);
 
 }

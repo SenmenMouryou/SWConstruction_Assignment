@@ -9,7 +9,7 @@ import java.util.Properties;
  */
 public class Property_Manager {
 
-    private static final String filename = "Source/settings.property";
+    private static final String filename = "Resource/settings.property";
 
     /**
      * 向配置文件中插入字段

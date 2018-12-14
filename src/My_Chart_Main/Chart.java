@@ -1,5 +1,8 @@
 package My_Chart_Main;
 
+import com.sun.istack.internal.NotNull;
+
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -12,11 +15,11 @@ import java.util.logging.Logger;
  * 并支持对该折线图的整数比例缩放与平移
  */
 public class Chart {
+
     //日志类
     private Logger logger = Logger.getLogger(Chart.class.getName());
 
     /************************数据数组*************************/
-
     //原始数据数组
     private int[] data_Array_Origin = null;
     public void set_Data(int[] data) {
@@ -61,10 +64,13 @@ public class Chart {
     }
 
     //显示数据点的横向间距
-    private int space_Between_Points = 5;
-
-    //允许显示的数据长度
-    private int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
+    private int space_Between_Points = 5;{
+        try {
+            space_Between_Points = Integer.parseInt(Property_Manager.read_Property("SPACE_BETWEEN_POINTS"));
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"配置文件读取失败");
+        }
+    }
 
     //绘制缩放比例
     private double print_Scale = 1.0;
@@ -79,11 +85,19 @@ public class Chart {
     }
 
     /**
+     * 构造器，读入初始的原始数据
+     * @param data 原始数据
+     */
+    public Chart(@NotNull int[] data){
+        logger.log(Level.INFO,"图表类已构造");
+        this.data_Array_Origin = data;
+    }
+
+    /**
      * 重新绘制曲线，更新其缩放比例
      * @param print_Scale  新的绘制缩放比例
-     * @param canvas 需要重绘的画布
      */
-    public void repaint(double print_Scale, Canvas canvas){
+    public Chart_Panel repaint_Chart(double print_Scale){
 
         //更新绘制缩放比例
         set_Print_Scale(print_Scale);
@@ -92,26 +106,33 @@ public class Chart {
         logger.log(Level.INFO,"计算重绘的生成数组");
         form_Data_Array_Generate();
 
-
-
         logger.log(Level.INFO,"已重绘图表");
 
+        //构造绘制数组
+        int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
+        int[] data_Print = new int[print_Data_Length];
+        for(int i = 0; i < print_Data_Length; i++){
+            data_Print[i] = data_Array_Generate[i];
+        }
+
+        return new Chart_Panel(data_Print);
     }
 
     /**
      * 重新绘制曲线，若超出生成数组范围则更新其显示起始点索引
      * @param generate_Index_Start_Paint 开始显示生成数组的索引
-     * @param canvas 需要重绘的画布
      */
-    public void repaint(int generate_Index_Start_Paint, Canvas canvas){
+    public Chart_Panel repaint_Chart(int generate_Index_Start_Paint){
 
+        int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
+        int[] data_Print = new int[print_Data_Length];
         //判断是否需要重新计算生成数组
         if(generate_Index_Start_Paint >= 0 &&
-                generate_Index_Start_Paint < data_Array_Generate.length) {
+                generate_Index_Start_Paint + print_Data_Length <= data_Array_Generate.length) {
             //不需要重新计算生成数组：新的显示域仍在生成数组范围内
-
-            //重绘画布
-
+            for(int i = 0; i < print_Data_Length; i++){
+                data_Print[i] = data_Array_Generate[i+generate_Index_Start_Paint];
+            }
         }
         else{
             //需要重新计算生成数组
@@ -120,12 +141,16 @@ public class Chart {
             //重新计算生成数组
             form_Data_Array_Generate();
 
-            //重绘画布
-
+            //构造绘制数组
+            for(int i = 0; i < print_Data_Length; i++){
+                data_Print[i] = data_Array_Generate[i];
+            }
         }
 
-        //更新绘制起始索引
+        //重绘画布
         logger.log(Level.INFO,"已重绘图表");
+        return new Chart_Panel(data_Print);
+
     }
 
     /**
