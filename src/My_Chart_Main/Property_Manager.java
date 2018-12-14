@@ -5,7 +5,7 @@ import java.util.Properties;
 
 /**
  * @author SENMEN
- * 配置文件管理类
+ * 配置文件管理工具类
  */
 public class Property_Manager {
 

@@ -89,8 +89,14 @@ public class Chart {
      * @param data 原始数据
      */
     public Chart(@NotNull int[] data){
-        logger.log(Level.INFO,"图表类已构造");
+
+        //取得原始数组
         this.data_Array_Origin = data;
+
+        //构造生成数组
+        form_Data_Array_Generate();
+
+        logger.log(Level.INFO,"图表类已构造");
     }
 
     /**
@@ -106,8 +112,6 @@ public class Chart {
         logger.log(Level.INFO,"计算重绘的生成数组");
         form_Data_Array_Generate();
 
-        logger.log(Level.INFO,"已重绘图表");
-
         //构造绘制数组
         int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
         int[] data_Print = new int[print_Data_Length];
@@ -115,6 +119,8 @@ public class Chart {
             data_Print[i] = data_Array_Generate[i];
         }
 
+        logger.log(Level.INFO,"已生成重绘图表");
+        //重绘图表面板
         return new Chart_Panel(data_Print);
     }
 
@@ -147,8 +153,8 @@ public class Chart {
             }
         }
 
-        //重绘画布
-        logger.log(Level.INFO,"已重绘图表");
+        //重绘图表面板
+        logger.log(Level.INFO,"已生成重绘图表");
         return new Chart_Panel(data_Print);
 
     }

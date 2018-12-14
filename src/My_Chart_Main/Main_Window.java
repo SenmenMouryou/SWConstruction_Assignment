@@ -11,12 +11,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * @author SENMEN
  * 程序的主要窗口
  */
-
 public class Main_Window extends JFrame {
     //日志类
     private Logger logger = Logger.getLogger(Main_Window.class.getName());
+
+    //窗口的上层驱动器
+    private Driver driver = null;
 
     //文件名
     private String filename = "";
@@ -24,7 +27,24 @@ public class Main_Window extends JFrame {
         return filename;
     }
 
-    public Main_Window() throws HeadlessException {
+    //图表显示通道面板数组
+    private int CHANNEL_PANEL_ARRAY_LENGTH = 0;{
+        try {
+            CHANNEL_PANEL_ARRAY_LENGTH = Integer.parseInt(Property_Manager.read_Property("CHANNEL_NUM"));
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"配置文件读取失败",e);
+        }
+    }
+    private Channel_Panel[] channel_Panel_Array = new Channel_Panel[CHANNEL_PANEL_ARRAY_LENGTH];
+    public Channel_Panel[] get_Channel_Panel_Array() {
+        return channel_Panel_Array;
+    }
+
+    public Main_Window(Driver driver) throws HeadlessException {
+
+        //获取上层驱动器
+        this.driver = driver;
+
         this.setTitle("My My_Chart_Main.Chart");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -49,36 +69,25 @@ public class Main_Window extends JFrame {
         Main_Menu_Bar menuBar = new Main_Menu_Bar();
         this.setJMenuBar(menuBar);
 
-        test_Canvas();
+        //添加通道面板
+        init_Channel_Panels();
+        this.getContentPane().setLayout(new GridLayout(CHANNEL_PANEL_ARRAY_LENGTH,1));
+        for(int i = 0; i < CHANNEL_PANEL_ARRAY_LENGTH; i++){
+            this.getContentPane().add(this.channel_Panel_Array[i]);
+        }
+        logger.log(Level.INFO,"通道面板已添加至窗口");
 
-        //显示窗口
-//      this.pack();
-        this.setVisible(true);
+        logger.log(Level.INFO,"窗口已初始化");
     }
 
-    private void test_Canvas() {
-        int[] data = new int[100];
-        for(int i=0;i<data.length;i++){
-            if(i%2==0){
-                data[i] = i;
-            }
-            else {
-                data[i] = -1*i;
-            }
+    /**
+     * 初始化通道面板数组
+     */
+    private void init_Channel_Panels() {
+        for(int i = 0; i < CHANNEL_PANEL_ARRAY_LENGTH; i++){
+            channel_Panel_Array[i] = new Channel_Panel();
         }
-
-        Chart_Panel panel1 = new Chart_Panel(data);
-        Chart_Panel panel2 = new Chart_Panel(data);
-        Chart_Panel panel3 = new Chart_Panel(data);
-        Chart_Panel panel4 = new Chart_Panel(data);
-
-        this.getContentPane().setLayout(new GridLayout(4,1));
-        this.getContentPane().add(panel1);
-        this.getContentPane().add(panel2);
-        this.getContentPane().add(panel3);
-        this.getContentPane().add(panel4);
-
-
+        logger.log(Level.INFO,"通道面板已初始化");
     }
 
     /**
@@ -110,9 +119,13 @@ public class Main_Window extends JFrame {
                     int return_Val = jFileChooser.showOpenDialog(null);
                     if(return_Val == jFileChooser.APPROVE_OPTION){
                         if(check_File_Length_Legal()){
+
+                            //取得文件路径
                             filename = jFileChooser.getSelectedFile().getAbsolutePath();
-                            //调用显示图表功能
-//                        MARKMARKMARKMARKMARK
+
+                            //由将打开的文件构造读取器，上传给驱动器，使驱动器获取数据
+                            driver.open_File(new Data_Reader(filename));
+
                         }
                         else{
                             JOptionPane.showMessageDialog(Main_Window.this.getParent(),"读取的文件过大",

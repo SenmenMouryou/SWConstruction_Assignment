@@ -2,6 +2,7 @@ package My_Chart_Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -14,12 +15,9 @@ public class Channel_Panel extends JPanel {
     //日志类
     private Logger logger = Logger.getLogger(Channel_Panel.class.getName());
 
-    //图表
-    private Chart chart = null;
-
     //图表面板
     private Chart_Panel chart_Panel = null;
-    public void set_Chart_Panel(Chart_Panel chart_Panel) {
+    public void set_Chart_Panel(Chart_Panel chart_Panel){
         this.chart_Panel = chart_Panel;
     }
 
@@ -28,18 +26,16 @@ public class Channel_Panel extends JPanel {
      */
     public Channel_Panel(){
         this.setLayout(new BorderLayout(2,2));
-    }
-
-    public void set_Chart(Chart chart){
-        this.chart = chart;
-        this.chart_Panel = chart.repaint_Chart(0);
+        logger.log(Level.INFO,"通道面板已构造");
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         //绘制图表
-        if(this.chart_Panel!=null){
+        if(this.chart_Panel != null){
+            MMMM
+            this.add(this.chart_Panel,"");
             this.chart_Panel.paint(g);
         }
     }

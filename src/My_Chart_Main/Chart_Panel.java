@@ -32,12 +32,12 @@ public class Chart_Panel extends JPanel {
     private final int scale_Y = 2;
 
     /**
-     * 曲线绘制面板的构造器
+     * 图表绘制面板的构造器
      * @param data 需要绘制的生成数组
      */
     public Chart_Panel(int[] data){
         this.data = data;
-        logger.log(Level.INFO,"曲线绘制面板已初始化");
+        logger.log(Level.INFO,"图表绘制面板已构造");
     }
 
     @Override

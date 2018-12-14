@@ -13,7 +13,7 @@ public class Main {
     private static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        My_Chart_Main.Main_Window window = new My_Chart_Main.Main_Window();
+        Driver driver = new Driver();
 
 //        Test_Drivers.Data_Reader_Tester test = new Test_Drivers.Data_Reader_Tester();
 //        test.test_Start();
