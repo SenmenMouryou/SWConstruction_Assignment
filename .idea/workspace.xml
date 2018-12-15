@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08abe719-3f3f-4f48-a16a-e8786961de71" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Channel_Panel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Channel_Panel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Chart.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Chart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Chart_Panel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Chart_Panel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Driver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Main_Window$Listener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyChart/My_Chart_Main/Main_Window$Listener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/My_Chart_Main/Channel_Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/My_Chart_Main/Channel_Panel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/My_Chart_Main/Chart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/My_Chart_Main/Chart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/My_Chart_Main/Chart_Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/My_Chart_Main/Chart_Panel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/My_Chart_Main/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/My_Chart_Main/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/My_Chart_Main/Main_Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/My_Chart_Main/Main_Window.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/My_Chart_Main/Chart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="221" column="44" selection-start-line="221" selection-start-column="44" selection-end-line="221" selection-end-column="44" />
+            <state relative-caret-position="453">
+              <caret line="218" column="10" selection-start-line="218" selection-start-column="10" selection-end-line="218" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2188#2189#0" expanded="true" />
@@ -188,13 +178,13 @@
         <option value="$PROJECT_DIR$/Resource/settings.property" />
         <option value="$PROJECT_DIR$/src/My_Chart_Main/Channel_Panel.java" />
         <option value="$PROJECT_DIR$/src/My_Chart_Main/Chart_Panel.java" />
-        <option value="$PROJECT_DIR$/src/My_Chart_Main/Chart.java" />
         <option value="$PROJECT_DIR$/src/My_Chart_Main/Main_Window.java" />
         <option value="$PROJECT_DIR$/src/My_Chart_Main/Driver.java" />
+        <option value="$PROJECT_DIR$/src/My_Chart_Main/Chart.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="81" />
     <option name="y" value="-9" />
     <option name="width" value="960" />
@@ -251,7 +241,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544877444540" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544890156286" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -308,15 +298,15 @@
       <workItem from="1544595323234" duration="18440000" />
       <workItem from="1544661612157" duration="29645000" />
       <workItem from="1544849650607" duration="1040000" />
-      <workItem from="1544856228680" duration="21072000" />
+      <workItem from="1544856228680" duration="21115000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70338000" />
+    <option name="totallyTimeSpent" value="70381000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19527897" />
@@ -328,7 +318,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32924107" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3203125" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3203125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -336,7 +326,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32924107" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32924107" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32924107" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32924107" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -539,8 +529,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/My_Chart_Main/Chart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="221" column="44" selection-start-line="221" selection-start-column="44" selection-end-line="221" selection-end-column="44" />
+        <state relative-caret-position="453">
+          <caret line="218" column="10" selection-start-line="218" selection-start-column="10" selection-end-line="218" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2188#2189#0" expanded="true" />
