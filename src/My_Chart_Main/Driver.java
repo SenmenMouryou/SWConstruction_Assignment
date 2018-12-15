@@ -85,10 +85,10 @@ public class Driver {
         logger.log(Level.INFO,"一阶积分已计算");
 
         //更新图表类
-        chart_Array[0] = new Chart(source_Data_Int);
-        chart_Array[1] = new Chart(diff_Data);
-        chart_Array[2] = new Chart(sec_Diff_Data);
-        chart_Array[3] = new Chart(intgr_Data);
+        chart_Array[0] = new Chart(source_Data_Int, 0);
+        chart_Array[1] = new Chart(diff_Data, 1);
+        chart_Array[2] = new Chart(sec_Diff_Data, 2);
+        chart_Array[3] = new Chart(intgr_Data, 3);
 
         //更新窗口显示
         for(int i = 0; i < CHART_ARRAY_LENGTH; i++){

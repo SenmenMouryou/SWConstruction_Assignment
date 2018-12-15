@@ -3,8 +3,7 @@ package My_Chart_Main;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -85,7 +84,7 @@ public class Main_Window extends JFrame {
      */
     private void init_Channel_Panels() {
         for(int i = 0; i < CHANNEL_PANEL_ARRAY_LENGTH; i++){
-            channel_Panel_Array[i] = new Channel_Panel();
+            channel_Panel_Array[i] = new Channel_Panel(i);
         }
         logger.log(Level.INFO,"通道面板已初始化");
     }
@@ -110,7 +109,6 @@ public class Main_Window extends JFrame {
             item_Open.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
 
                     JFileChooser jFileChooser = new
                             JFileChooser("C:");
@@ -174,4 +172,6 @@ public class Main_Window extends JFrame {
             return true;
         }
     }
+
+
 }

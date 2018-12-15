@@ -4,6 +4,10 @@ import com.sun.istack.internal.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,10 +18,16 @@ import java.util.logging.Logger;
  * 接收一个存放数据的int数组，将其转化为最大为窗口宽度的折线图显示在canvas类中
  * 并支持对该折线图的整数比例缩放与平移
  */
-public class Chart {
+public class Chart{
 
     //日志类
     private Logger logger = Logger.getLogger(Chart.class.getName());
+
+    //图表ID
+    private int chart_ID = 0;
+    public int get_Chart_ID() {
+        return chart_ID;
+    }
 
     /************************数据数组*************************/
     //原始数据数组
@@ -34,16 +44,6 @@ public class Chart {
     private final int DEFAULT_DATA_GENERATE_LENGTH = 1000;
     //生成数组
     private int[] data_Array_Generate = new int[DEFAULT_DATA_GENERATE_LENGTH];
-
-    /************************显示设置*************************/
-    //窗口宽度
-    private int WINDOW_WIDTH = 0;{
-        try {
-            WINDOW_WIDTH = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
-        } catch (IOException e) {
-            logger.log(Level.SEVERE,"配置文件加载出错",e);
-        }
-    }
 
     //生成数组起始对应原始数组的索引
     private int origin_Index_To_Generate_Start = 0;
@@ -62,6 +62,17 @@ public class Chart {
         }
         this.origin_Index_To_Generate_Start = origin_Index_To_Generate_Start;
     }
+
+    /************************显示设置*************************/
+    //窗口宽度
+    private int WINDOW_WIDTH = 0;{
+        try {
+            WINDOW_WIDTH = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"配置文件加载出错",e);
+        }
+    }
+
 
     //显示数据点的横向间距
     private int space_Between_Points = 5;{
@@ -84,11 +95,19 @@ public class Chart {
         }
     }
 
+    //生成数组绘制起始点
+    private int generate_Index_Start_Paint = 0;
+    public int get_Generate_Index_Start_Paint() {
+        return generate_Index_Start_Paint;
+    }
+
     /**
      * 构造器，读入初始的原始数据
      * @param data 原始数据
      */
-    public Chart(@NotNull int[] data){
+    public Chart(@NotNull int[] data, int chart_ID){
+
+        this.chart_ID = chart_ID;
 
         //取得原始数组
         this.data_Array_Origin = data;
@@ -121,7 +140,7 @@ public class Chart {
 
         logger.log(Level.INFO,"已生成重绘图表");
         //重绘图表面板
-        return new Chart_Panel(data_Print);
+        return new Chart_Panel(data_Print, this);
     }
 
     /**
@@ -139,6 +158,8 @@ public class Chart {
             for(int i = 0; i < print_Data_Length; i++){
                 data_Print[i] = data_Array_Generate[i+generate_Index_Start_Paint];
             }
+            //更新起始绘制点
+            this.generate_Index_Start_Paint = generate_Index_Start_Paint;
         }
         else{
             //需要重新计算生成数组
@@ -151,12 +172,13 @@ public class Chart {
             for(int i = 0; i < print_Data_Length; i++){
                 data_Print[i] = data_Array_Generate[i];
             }
+            //更新起始绘制点
+            this.generate_Index_Start_Paint = 0;
         }
 
         //重绘图表面板
         logger.log(Level.INFO,"已生成重绘图表");
-        return new Chart_Panel(data_Print);
-
+        return new Chart_Panel(data_Print, this);
     }
 
     /**
@@ -183,5 +205,6 @@ public class Chart {
         logger.log(Level.INFO,"已重新计算绘制数组");
 
     }
+
 
 }
