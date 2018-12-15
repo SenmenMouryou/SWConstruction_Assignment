@@ -29,16 +29,16 @@ public class Main {
     }
 
     private static void test_IO(){
-        int FILE_LENGTH = 10000000;
+        int FILE_LENGTH = 100;
 
-        String filename = "Test/file_Reader_Test_Main.bin";
+        String filename = "Test/file_Reader_Test_Main_100.bin";
 
         try {
             OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filename));
 
             logger.log(Level.INFO,"文件开始写入");
 
-            for(int i=0; i<FILE_LENGTH; i++){
+            for(int i = 0; i < FILE_LENGTH; i++){
                 byte byte_To_Write = (byte)i;
                 outputStream.write(byte_To_Write);
             }

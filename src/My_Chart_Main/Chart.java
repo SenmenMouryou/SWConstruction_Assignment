@@ -2,12 +2,6 @@ package My_Chart_Main;
 
 import com.sun.istack.internal.NotNull;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,9 +35,9 @@ public class Chart{
     }
 
     //默认的生成数组的长度
-    private final int DEFAULT_DATA_GENERATE_LENGTH = 1000;
+    private int DATA_GENERATE_LENGTH = 1000;
     //生成数组
-    private int[] data_Array_Generate = new int[DEFAULT_DATA_GENERATE_LENGTH];
+    private int[] data_Array_Generate = new int[DATA_GENERATE_LENGTH];
 
     //生成数组起始对应原始数组的索引
     private int origin_Index_To_Generate_Start = 0;
@@ -112,6 +106,10 @@ public class Chart{
         //取得原始数组
         this.data_Array_Origin = data;
 
+        if(DATA_GENERATE_LENGTH > data.length){
+            DATA_GENERATE_LENGTH = data.length;
+        }
+
         //构造生成数组
         form_Data_Array_Generate();
 
@@ -150,19 +148,30 @@ public class Chart{
     public Chart_Panel repaint_Chart(int generate_Index_Start_Paint){
 
         int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
+        if(print_Data_Length > DATA_GENERATE_LENGTH){
+            print_Data_Length = DATA_GENERATE_LENGTH;
+        }
         int[] data_Print = new int[print_Data_Length];
+
         //判断是否需要重新计算生成数组
         if(generate_Index_Start_Paint >= 0 &&
                 generate_Index_Start_Paint + print_Data_Length <= data_Array_Generate.length) {
-            //不需要重新计算生成数组：新的显示域仍在生成数组范围内
-            for(int i = 0; i < print_Data_Length; i++){
-                data_Print[i] = data_Array_Generate[i+generate_Index_Start_Paint];
+            if(generate_Index_Start_Paint + print_Data_Length > data_Array_Origin.length){
+                logger.log(Level.WARNING,"超出原始数组范围，不移动显示区间");
             }
-            //更新起始绘制点
-            this.generate_Index_Start_Paint = generate_Index_Start_Paint;
+            else{
+                //不需要重新计算生成数组：新的显示域仍在生成数组范围内
+                logger.log(Level.INFO,"仅移动显示区间");
+                //更新起始绘制点
+                this.generate_Index_Start_Paint = generate_Index_Start_Paint;
+            }
+            for(int i = 0; i < print_Data_Length; i++){
+                data_Print[i] = data_Array_Generate[i + this.generate_Index_Start_Paint];
+            }
         }
         else{
             //需要重新计算生成数组
+            logger.log(Level.INFO,"重新计算生成数组");
             //重置生成数组起始对应原始数组的索引
             set_Origin_Index_To_Generate_Start(generate_Index_Start_Paint + origin_Index_To_Generate_Start);
             //重新计算生成数组
@@ -171,6 +180,7 @@ public class Chart{
             //构造绘制数组
             for(int i = 0; i < print_Data_Length; i++){
                 data_Print[i] = data_Array_Generate[i];
+                System.out.print(data_Print[i]+" ");
             }
             //更新起始绘制点
             this.generate_Index_Start_Paint = 0;
@@ -187,7 +197,8 @@ public class Chart{
     private void form_Data_Array_Generate() {
 
         //通过原始数据计算生成数组原型
-        for(int i = 0; i < DEFAULT_DATA_GENERATE_LENGTH; i++){
+        System.out.println(DATA_GENERATE_LENGTH);
+        for(int i = 0; i < DATA_GENERATE_LENGTH; i++){
             if(origin_Index_To_Generate_Start +i < data_Array_Origin.length){
                 data_Array_Generate[i] = data_Array_Origin[origin_Index_To_Generate_Start +i];
             }

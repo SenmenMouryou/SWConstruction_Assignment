@@ -21,7 +21,7 @@ public class Main_Window extends JFrame {
     private Driver driver = null;
 
     //文件名
-    private String filename = "";
+    private String filename = null;
     public String getFilename() {
         return filename;
     }
@@ -76,6 +76,11 @@ public class Main_Window extends JFrame {
         }
         logger.log(Level.INFO,"通道面板已添加至窗口");
 
+        //添加监听器
+        Listener listner = new Listener();
+        this.addKeyListener(listner);
+        this.addMouseWheelListener(listner);
+
         logger.log(Level.INFO,"窗口已初始化");
     }
 
@@ -104,7 +109,7 @@ public class Main_Window extends JFrame {
 
             //添加“文件”菜单的各菜单项
             //打开
-            JMenuItem item_Open = new JMenuItem("打开");
+            JMenuItem item_Open = new JMenuItem("打开(O)");
             item_Open.setMnemonic('O');
             item_Open.addActionListener(new ActionListener() {
                 @Override
@@ -116,23 +121,39 @@ public class Main_Window extends JFrame {
                     jFileChooser.setFileFilter(filter);
                     int return_Val = jFileChooser.showOpenDialog(null);
                     if(return_Val == jFileChooser.APPROVE_OPTION){
+                        //取得文件路径
+                        filename = jFileChooser.getSelectedFile().getAbsolutePath();
                         if(check_File_Length_Legal()){
-
-                            //取得文件路径
-                            filename = jFileChooser.getSelectedFile().getAbsolutePath();
-
                             //由将打开的文件构造读取器，上传给驱动器，使驱动器获取数据
                             driver.open_File(new Data_Reader(filename));
-
                         }
                         else{
                             JOptionPane.showMessageDialog(Main_Window.this.getParent(),"读取的文件过大",
                                     "警告",JOptionPane.WARNING_MESSAGE);
+                            filename = null;
                         }
                     }
                 }
             });
             menu_File.add(item_Open);
+
+            //重置
+            JMenuItem item_Reset = new JMenuItem("重置(R)");
+            item_Reset.setMnemonic('R');
+            item_Reset.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(filename != null){
+                        driver.open_File(new Data_Reader(filename));
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Main_Window.this.getParent(),"尚未打开任何文件！",
+                                "警告",JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            });
+            menu_File.add(item_Reset);
+
             //分割线
             menu_File.addSeparator();
             //退出
@@ -173,5 +194,56 @@ public class Main_Window extends JFrame {
         }
     }
 
+    /**
+     * Main_Window监听器私用类
+     */
+    private class Listener implements KeyListener, MouseWheelListener{
 
-}
+        /**
+         * 单个通道面板的鼠标滚轮事件
+         * @param channel_Panel 执行事件的通道面板
+         * @param e             滚轮事件
+         */
+        private void channel_Mouse_Wheel_Event(Channel_Panel channel_Panel, MouseWheelEvent e){
+            //滚轮上滚/下滚
+            int rotation = e.getWheelRotation();
+            //取得当前绘制起始点
+            int pressent_Start_Index =
+                    channel_Panel.get_Chart_Panel().get_Chart().get_Generate_Index_Start_Paint();
+            //取得图表类
+            Chart chart = channel_Panel.get_Chart_Panel().get_Chart();
+            //更新图表面板
+            channel_Panel.set_Chart_Panel
+                    (chart.repaint_Chart(pressent_Start_Index + rotation*2));
+
+            channel_Panel.repaint();
+            channel_Panel.getParent().repaint();
+            logger.log(Level.INFO,"图表面板已更新");
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+
+        @Override
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            for(int i = 0; i < channel_Panel_Array.length; i++){
+                if(channel_Panel_Array[i].get_Chart_Panel() != null){
+                    channel_Mouse_Wheel_Event(channel_Panel_Array[i],e);
+                }
+            }
+        }
+    }//private class Listener
+
+}//public class Main_Window

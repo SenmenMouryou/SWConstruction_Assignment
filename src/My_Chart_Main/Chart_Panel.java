@@ -37,6 +37,9 @@ public class Chart_Panel extends JPanel{
 
     //所属图表
     private Chart chart = null;
+    public Chart get_Chart() {
+        return chart;
+    }
 
     //此图表是否被激活
     private boolean is_Active = false;
