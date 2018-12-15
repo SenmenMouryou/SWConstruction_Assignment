@@ -93,7 +93,7 @@ public class Driver {
         //更新窗口显示
         for(int i = 0; i < CHART_ARRAY_LENGTH; i++){
             main_Window.get_Channel_Panel_Array()[i].set_Chart_Panel
-                    (chart_Array[i].repaint_Chart(0));
+                    (chart_Array[i].repaint_Chart());
         }
         main_Window.getContentPane().repaint();
 

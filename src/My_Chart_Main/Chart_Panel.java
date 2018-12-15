@@ -24,13 +24,7 @@ public class Chart_Panel extends JPanel{
     private int[] data = null;
 
     //绘制间距
-    private int space_Between_Points; {
-        try {
-            space_Between_Points = Integer.parseInt(Property_Manager.read_Property("SPACE_BETWEEN_POINTS"));
-        } catch (IOException e) {
-            logger.log(Level.SEVERE,"配置文件读取失败");
-        }
-    }
+    private int space_Between_Points = 0;
 
     //纵向缩放比例
     private double scale_Y = 2;
@@ -51,6 +45,7 @@ public class Chart_Panel extends JPanel{
     public Chart_Panel(int[] data, Chart chart){
         this.data = data;
         this.chart = chart;
+        this.space_Between_Points = chart.get_Space_Between_Points();
         logger.log(Level.INFO,"图表绘制面板已构造");
     }
 

@@ -67,19 +67,27 @@ public class Chart{
         }
     }
 
-
     //显示数据点的横向间距
-    private int space_Between_Points = 5;{
-        try {
-            space_Between_Points = Integer.parseInt(Property_Manager.read_Property("SPACE_BETWEEN_POINTS"));
-        } catch (IOException e) {
-            logger.log(Level.SEVERE,"配置文件读取失败");
+    private int space_Between_Points = 3;
+    private final int MAX_SPACE_BETWEEN_POINTS = 10;
+    public int get_Space_Between_Points() {
+        return space_Between_Points;
+    }
+    public void set_Space_Between_Points(int space_Between_Points) {
+        if(space_Between_Points > 0 && space_Between_Points <= MAX_SPACE_BETWEEN_POINTS ){
+            this.space_Between_Points = space_Between_Points;
+        }
+        else{
+            logger.log(Level.WARNING,"间距修改失败:超出间距范围");
         }
     }
 
     //绘制缩放比例
     private double print_Scale = 1.0;
     private final double MAX_PRINT_SCALE = 3.0;
+    public double get_Print_Scale() {
+        return print_Scale;
+    }
     public void set_Print_Scale(double print_Scale) {
         if(print_Scale > 0 && print_Scale < MAX_PRINT_SCALE){
             this.print_Scale = print_Scale;
@@ -93,6 +101,13 @@ public class Chart{
     private int generate_Index_Start_Paint = 0;
     public int get_Generate_Index_Start_Paint() {
         return generate_Index_Start_Paint;
+    }
+    public void set_Generate_Index_Start_Paint(int generate_Index_Start_Paint) {
+        if(generate_Index_Start_Paint + WINDOW_WIDTH/space_Between_Points <= data_Array_Origin.length){
+            this.generate_Index_Start_Paint = generate_Index_Start_Paint;
+        }else {
+            logger.log(Level.WARNING,"超出原始数组范围，不移动显示起始点");
+        }
     }
 
     /**
@@ -116,57 +131,56 @@ public class Chart{
         logger.log(Level.INFO,"图表类已构造");
     }
 
+//    /**
+//     * 重新绘制曲线，更新其缩放比例
+//     * @param print_Scale  新的绘制缩放比例
+//     */
+//    public Chart_Panel repaint_Chart(double print_Scale){
+//
+//        //更新绘制缩放比例
+//        set_Print_Scale(print_Scale);
+//
+//        //计算重绘的生成数组
+//        logger.log(Level.INFO,"计算重绘的生成数组");
+//        form_Data_Array_Generate();
+//
+//        //构造绘制数组
+//        int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
+//        int[] data_Print = new int[print_Data_Length];
+//        for(int i = 0; i < print_Data_Length; i++){
+//            data_Print[i] = data_Array_Generate[i];
+//        }
+//
+//        logger.log(Level.INFO,"已生成重绘图表");
+//        //重绘图表面板
+//        return new Chart_Panel(data_Print, this);
+//    }
+
     /**
-     * 重新绘制曲线，更新其缩放比例
-     * @param print_Scale  新的绘制缩放比例
+     * 重新绘制曲线
      */
-    public Chart_Panel repaint_Chart(double print_Scale){
+    public Chart_Panel repaint_Chart(){
 
-        //更新绘制缩放比例
-        set_Print_Scale(print_Scale);
-
-        //计算重绘的生成数组
-        logger.log(Level.INFO,"计算重绘的生成数组");
-        form_Data_Array_Generate();
-
-        //构造绘制数组
-        int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
-        int[] data_Print = new int[print_Data_Length];
-        for(int i = 0; i < print_Data_Length; i++){
-            data_Print[i] = data_Array_Generate[i];
-        }
-
-        logger.log(Level.INFO,"已生成重绘图表");
-        //重绘图表面板
-        return new Chart_Panel(data_Print, this);
-    }
-
-    /**
-     * 重新绘制曲线，若超出生成数组范围则更新其显示起始点索引
-     * @param generate_Index_Start_Paint 开始显示生成数组的索引
-     */
-    public Chart_Panel repaint_Chart(int generate_Index_Start_Paint){
-
-        int print_Data_Length = WINDOW_WIDTH/space_Between_Points;
-        if(print_Data_Length > DATA_GENERATE_LENGTH){
+        //计算显示数据的长度
+        int print_Data_Length = 0;
+        if( WINDOW_WIDTH/space_Between_Points > DATA_GENERATE_LENGTH){
+            //若生成数组短于窗口宽度允许显示的范围
             print_Data_Length = DATA_GENERATE_LENGTH;
         }
+        else{
+            //若生成数组不短于窗口宽度允许显示的范围
+            print_Data_Length = WINDOW_WIDTH/space_Between_Points;
+        }
+        //显示数据的数组
         int[] data_Print = new int[print_Data_Length];
 
         //判断是否需要重新计算生成数组
         if(generate_Index_Start_Paint >= 0 &&
                 generate_Index_Start_Paint + print_Data_Length <= data_Array_Generate.length) {
-            if(generate_Index_Start_Paint + print_Data_Length > data_Array_Origin.length){
-                logger.log(Level.WARNING,"超出原始数组范围，不移动显示区间");
-            }
-            else{
-                //不需要重新计算生成数组：新的显示域仍在生成数组范围内
-                logger.log(Level.INFO,"仅移动显示区间");
-                //更新起始绘制点
-                this.generate_Index_Start_Paint = generate_Index_Start_Paint;
-            }
+            //不需要重新计算生成数组：新的显示域仍在生成数组范围内
+            logger.log(Level.INFO,"仅移动显示区间");
             for(int i = 0; i < print_Data_Length; i++){
-                data_Print[i] = data_Array_Generate[i + this.generate_Index_Start_Paint];
+                data_Print[i] = data_Array_Generate[i + generate_Index_Start_Paint];
             }
         }
         else{
@@ -180,12 +194,10 @@ public class Chart{
             //构造绘制数组
             for(int i = 0; i < print_Data_Length; i++){
                 data_Print[i] = data_Array_Generate[i];
-                System.out.print(data_Print[i]+" ");
             }
             //更新起始绘制点
-            this.generate_Index_Start_Paint = 0;
+            set_Generate_Index_Start_Paint(0);
         }
-
         //重绘图表面板
         logger.log(Level.INFO,"已生成重绘图表");
         return new Chart_Panel(data_Print, this);
@@ -197,7 +209,6 @@ public class Chart{
     private void form_Data_Array_Generate() {
 
         //通过原始数据计算生成数组原型
-        System.out.println(DATA_GENERATE_LENGTH);
         for(int i = 0; i < DATA_GENERATE_LENGTH; i++){
             if(origin_Index_To_Generate_Start +i < data_Array_Origin.length){
                 data_Array_Generate[i] = data_Array_Origin[origin_Index_To_Generate_Start +i];

@@ -29,7 +29,7 @@ public class Channel_Panel extends JPanel{
         }
         this.chart_Panel = chart_Panel;
         this.add(this.chart_Panel, BorderLayout.CENTER);
-        this.updateUI();
+        this.repaint();
     }
     public Chart_Panel get_Chart_Panel() {
         return chart_Panel;

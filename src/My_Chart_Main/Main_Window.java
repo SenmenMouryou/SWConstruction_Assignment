@@ -199,6 +199,8 @@ public class Main_Window extends JFrame {
      */
     private class Listener implements KeyListener, MouseWheelListener{
 
+        private boolean key_Ctrl_Pressed = false;
+
         /**
          * 单个通道面板的鼠标滚轮事件
          * @param channel_Panel 执行事件的通道面板
@@ -206,20 +208,31 @@ public class Main_Window extends JFrame {
          */
         private void channel_Mouse_Wheel_Event(Channel_Panel channel_Panel, MouseWheelEvent e){
             //滚轮上滚/下滚
-            int rotation = e.getWheelRotation();
-            //取得当前绘制起始点
-            int pressent_Start_Index =
-                    channel_Panel.get_Chart_Panel().get_Chart().get_Generate_Index_Start_Paint();
+            int delta = e.getWheelRotation();
             //取得图表类
             Chart chart = channel_Panel.get_Chart_Panel().get_Chart();
             //更新图表面板
-            channel_Panel.set_Chart_Panel
-                    (chart.repaint_Chart(pressent_Start_Index + rotation*2));
-
+            chart.set_Generate_Index_Start_Paint(chart.get_Generate_Index_Start_Paint()+delta);
+            channel_Panel.set_Chart_Panel(chart.repaint_Chart());
             channel_Panel.repaint();
             channel_Panel.getParent().repaint();
             logger.log(Level.INFO,"图表面板已更新");
         }
+
+        private void channel_Mouse_Wheel_Event_Ctrl(Channel_Panel channel_Panel, MouseWheelEvent e){
+            //滚轮上滚/下滚的变化值
+            int delta = e.getWheelRotation();
+            //取得图表类
+            Chart chart = channel_Panel.get_Chart_Panel().get_Chart();
+            //更新图表面板
+            chart.set_Space_Between_Points(chart.get_Space_Between_Points() + delta);
+            channel_Panel.set_Chart_Panel(chart.repaint_Chart());
+            channel_Panel.repaint();
+            channel_Panel.getParent().repaint();
+
+            logger.log(Level.INFO,"图表面板已更新");
+        }
+
 
         @Override
         public void keyTyped(KeyEvent e) {
@@ -229,21 +242,37 @@ public class Main_Window extends JFrame {
         @Override
         public void keyPressed(KeyEvent e) {
 
+            if(e.getKeyCode()==KeyEvent.VK_CONTROL){
+                key_Ctrl_Pressed = true;
+            }
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
 
+            if(e.getKeyCode()==KeyEvent.VK_CONTROL){
+                key_Ctrl_Pressed = false;
+            }
         }
 
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {
-            for(int i = 0; i < channel_Panel_Array.length; i++){
-                if(channel_Panel_Array[i].get_Chart_Panel() != null){
-                    channel_Mouse_Wheel_Event(channel_Panel_Array[i],e);
+            if(!key_Ctrl_Pressed) {
+                for (int i = 0; i < channel_Panel_Array.length; i++) {
+                    if (channel_Panel_Array[i].get_Chart_Panel() != null) {
+                        channel_Mouse_Wheel_Event(channel_Panel_Array[i], e);
+                    }
+                }
+            }
+            else {
+                for (int i = 0; i < channel_Panel_Array.length; i++) {
+                    if (channel_Panel_Array[i].get_Chart_Panel() != null) {
+                        channel_Mouse_Wheel_Event_Ctrl(channel_Panel_Array[i], e);
+                    }
                 }
             }
         }
+
     }//private class Listener
 
 }//public class Main_Window
