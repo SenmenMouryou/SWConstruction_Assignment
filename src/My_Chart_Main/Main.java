@@ -1,8 +1,5 @@
 package My_Chart_Main;
 
-import Test_Drivers.Data_Array_Transformer_Tester;
-
-import javax.swing.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +10,7 @@ public class Main {
     private static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        Driver driver = new Driver();
+        Data_Driver dataDriver = new Data_Driver();
 
 //        Test_Drivers.Data_Reader_Tester test = new Test_Drivers.Data_Reader_Tester();
 //        test.test_Start();

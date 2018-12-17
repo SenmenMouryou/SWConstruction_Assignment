@@ -1,19 +1,18 @@
 package My_Chart_Main;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * @author SENMEN
- * 曲线生成的驱动类
+ * 图表生成的数据驱动类
  * 构造时读入读取器，调用数据处理器生成微分积分等数组
  */
-public class Driver {
+public class Data_Driver {
 
     //日志类
-    private Logger logger = Logger.getLogger(Driver.class.getName());
+    private Logger logger = Logger.getLogger(Data_Driver.class.getName());
 
     /*************************数据数组*************************/
     //原始数据
@@ -21,7 +20,6 @@ public class Driver {
 
     //整型原始数据副本
     private int[] source_Data_Int = null;
-
     //一阶微分
     private int[] diff_Data = null;
     //二阶微分
@@ -47,7 +45,7 @@ public class Driver {
     /**
      * 构造器
      */
-    public Driver(){
+    public Data_Driver(){
 
         //构造窗口
         main_Window = new Main_Window(this);
@@ -90,13 +88,38 @@ public class Driver {
         chart_Array[2] = new Chart(sec_Diff_Data, 2);
         chart_Array[3] = new Chart(intgr_Data, 3);
 
-        //更新窗口显示
+        //更新窗口中各通道面板的显示
+        Channel_Panel[] channel_Panels = main_Window.get_Channel_Panel_Array();
         for(int i = 0; i < CHART_ARRAY_LENGTH; i++){
-            main_Window.get_Channel_Panel_Array()[i].set_Chart_Panel
-                    (chart_Array[i].repaint_Chart());
+            channel_Panels[i].set_Chart_Panel(chart_Array[i].repaint_Chart());
         }
+        //给各通道面板添加标签文本
+        channel_Panels[0].add_Label_Name("原始数据");
+        channel_Panels[1].add_Label_Name("一阶微分");
+        channel_Panels[2].add_Label_Name("二阶微分");
+        channel_Panels[3].add_Label_Name("一阶积分");
         main_Window.getContentPane().repaint();
 
+    }
+
+    /**
+     * 调整缩放比例
+     * @param scale 新的缩放比例
+     */
+    public void modify_Scale(double scale){
+
+        for(int i = 0; i < CHART_ARRAY_LENGTH; i++){
+            Chart chart = chart_Array[i];
+            if(chart == null){
+                logger.log(Level.WARNING,"未定义图表数组内容");
+                return;
+            }
+            chart.set_Print_Scale(scale);
+            main_Window.get_Channel_Panel_Array()[i].set_Chart_Panel(
+                    chart.repaint_Chart()
+            );
+        }
+        main_Window.getContentPane().repaint();
     }
 
 }

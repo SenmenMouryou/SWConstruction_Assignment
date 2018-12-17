@@ -18,7 +18,7 @@ public class Main_Window extends JFrame {
     private Logger logger = Logger.getLogger(Main_Window.class.getName());
 
     //窗口的上层驱动器
-    private Driver driver = null;
+    private Data_Driver dataDriver = null;
 
     //文件名
     private String filename = null;
@@ -39,10 +39,20 @@ public class Main_Window extends JFrame {
         return channel_Panel_Array;
     }
 
-    public Main_Window(Driver driver) throws HeadlessException {
+    /***************************成员对话框*******************************/
+    //缩放比例调节
+    private Scale_Dialog Scale_Dialog = null;
+    public Scale_Dialog get_Scale_Dialog() {
+        return Scale_Dialog;
+    }
+    public void set_Scale_Dialog(Scale_Dialog scale_Dialog) {
+        Scale_Dialog = scale_Dialog;
+    }
+
+    public Main_Window(Data_Driver dataDriver) throws HeadlessException {
 
         //获取上层驱动器
-        this.driver = driver;
+        this.dataDriver = dataDriver;
 
         this.setTitle("My My_Chart_Main.Chart");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,12 +107,12 @@ public class Main_Window extends JFrame {
     /**
      * 该窗口的菜单栏
      */
-    class Main_Menu_Bar extends JMenuBar{
+    private class Main_Menu_Bar extends JMenuBar{
         /**
          * 构造器
          */
         public Main_Menu_Bar(){
-            //“文件”菜单
+            /***************************“文件”菜单*******************************/
             JMenu menu_File = new JMenu("文件(F)");
             menu_File.setMnemonic('F');
             this.add(menu_File);
@@ -125,7 +135,7 @@ public class Main_Window extends JFrame {
                         filename = jFileChooser.getSelectedFile().getAbsolutePath();
                         if(check_File_Length_Legal()){
                             //由将打开的文件构造读取器，上传给驱动器，使驱动器获取数据
-                            driver.open_File(new Data_Reader(filename));
+                            dataDriver.open_File(new Data_Reader(filename));
                         }
                         else{
                             JOptionPane.showMessageDialog(Main_Window.this.getParent(),"读取的文件过大",
@@ -144,7 +154,7 @@ public class Main_Window extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(filename != null){
-                        driver.open_File(new Data_Reader(filename));
+                        dataDriver.open_File(new Data_Reader(filename));
                     }
                     else{
                         JOptionPane.showMessageDialog(Main_Window.this.getParent(),"尚未打开任何文件！",
@@ -165,6 +175,37 @@ public class Main_Window extends JFrame {
                 }
             });
             menu_File.add(item_Exit);
+
+            /***************************“编辑”菜单*******************************/
+            JMenu menu_Edit = new JMenu("编辑(E)");
+            menu_File.setMnemonic('E');
+            this.add(menu_Edit);
+
+            //添加“编辑”菜单的各菜单项
+            //缩放
+            JMenuItem item_Scale = new JMenuItem("缩放(S)");
+            item_Scale.setMnemonic('S');
+            item_Scale.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(filename != null){
+                        if(get_Scale_Dialog()!=null){
+                        //调出缩放编辑对话框
+                            get_Scale_Dialog().setVisible(true);
+                        }
+                        else {
+                            set_Scale_Dialog(new Scale_Dialog(dataDriver));
+                            get_Scale_Dialog().setVisible(true);
+                        }
+                    }
+                    else{
+
+                        JOptionPane.showMessageDialog(Main_Window.this.getParent(),"尚未打开任何文件！",
+                                "警告",JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            });
+            menu_Edit.add(item_Scale);
 
         }
 
@@ -200,25 +241,38 @@ public class Main_Window extends JFrame {
     private class Listener implements KeyListener, MouseWheelListener{
 
         private boolean key_Ctrl_Pressed = false;
+        private boolean key_Space_Pressed = true;
 
         /**
-         * 单个通道面板的鼠标滚轮事件
+         * 鼠标滚轮事件:平移图表
          * @param channel_Panel 执行事件的通道面板
          * @param e             滚轮事件
          */
         private void channel_Mouse_Wheel_Event(Channel_Panel channel_Panel, MouseWheelEvent e){
-            //滚轮上滚/下滚
-            int delta = e.getWheelRotation();
             //取得图表类
             Chart chart = channel_Panel.get_Chart_Panel().get_Chart();
+
+            //滚轮上滚/下滚
+            int delta = 0;
+            if(!key_Space_Pressed){
+                delta = 9*e.getWheelRotation()/chart.get_Space_Between_Points();
+            }
+            else if(key_Space_Pressed){
+                delta = 30*e.getWheelRotation()/chart.get_Space_Between_Points();
+            }
             //更新图表面板
-            chart.set_Generate_Index_Start_Paint(chart.get_Generate_Index_Start_Paint()+delta);
+            chart.set_Generate_Index_Start_Paint(chart.get_Generate_Index_Start_Paint() + delta);
             channel_Panel.set_Chart_Panel(chart.repaint_Chart());
             channel_Panel.repaint();
             channel_Panel.getParent().repaint();
             logger.log(Level.INFO,"图表面板已更新");
         }
 
+        /**
+         * 按住Ctrl时鼠标滚轮事件：横向拉伸/缩小图表
+         * @param channel_Panel 执行事件的通道面板
+         * @param e             滚轮事件
+         */
         private void channel_Mouse_Wheel_Event_Ctrl(Channel_Panel channel_Panel, MouseWheelEvent e){
             //滚轮上滚/下滚的变化值
             int delta = e.getWheelRotation();
@@ -233,7 +287,6 @@ public class Main_Window extends JFrame {
             logger.log(Level.INFO,"图表面板已更新");
         }
 
-
         @Override
         public void keyTyped(KeyEvent e) {
 
@@ -245,6 +298,10 @@ public class Main_Window extends JFrame {
             if(e.getKeyCode()==KeyEvent.VK_CONTROL){
                 key_Ctrl_Pressed = true;
             }
+
+            if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                key_Space_Pressed = true;
+            }
         }
 
         @Override
@@ -252,6 +309,10 @@ public class Main_Window extends JFrame {
 
             if(e.getKeyCode()==KeyEvent.VK_CONTROL){
                 key_Ctrl_Pressed = false;
+            }
+
+            if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                key_Space_Pressed = false;
             }
         }
 
