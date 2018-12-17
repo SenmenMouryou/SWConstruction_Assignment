@@ -17,6 +17,7 @@ public class Byte_Array_To_Int {
 
         for(int i = 0; i < array_Length; i++){
             int_Array[i] = (int)byte_Array[i];
+            System.out.print(int_Array[i]+" ");
         }
 
         return int_Array;

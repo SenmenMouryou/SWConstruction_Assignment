@@ -90,15 +90,16 @@ public class Data_Driver {
 
         //更新窗口中各通道面板的显示
         Channel_Panel[] channel_Panels = main_Window.get_Channel_Panel_Array();
-        for(int i = 0; i < CHART_ARRAY_LENGTH; i++){
-            channel_Panels[i].set_Chart_Panel(chart_Array[i].repaint_Chart());
-        }
         //给各通道面板添加标签文本
         channel_Panels[0].add_Label_Name("原始数据");
         channel_Panels[1].add_Label_Name("一阶微分");
         channel_Panels[2].add_Label_Name("二阶微分");
         channel_Panels[3].add_Label_Name("一阶积分");
-        main_Window.getContentPane().repaint();
+        //给各通道添加图表曲线
+        for(int i = 0; i < CHART_ARRAY_LENGTH; i++){
+            channel_Panels[i].renew_Chart_Panel_And_Repaint(chart_Array[i].repaint_Chart());
+        }
+        main_Window.repaint();
 
     }
 
@@ -115,11 +116,10 @@ public class Data_Driver {
                 return;
             }
             chart.set_Print_Scale(scale);
-            main_Window.get_Channel_Panel_Array()[i].set_Chart_Panel(
-                    chart.repaint_Chart()
-            );
+            Channel_Panel channel_panel = main_Window.get_Channel_Panel_Array()[i];
+            channel_panel.renew_Chart_Panel_And_Repaint(chart.repaint_Chart());
+
         }
-        main_Window.getContentPane().repaint();
     }
 
 }

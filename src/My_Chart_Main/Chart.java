@@ -23,6 +23,15 @@ public class Chart{
         return chart_ID;
     }
 
+    //窗口宽度
+    private int WINDOW_WIDTH = 0;{
+        try {
+            WINDOW_WIDTH = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"配置文件加载出错",e);
+        }
+    }
+
     /************************数据数组*************************/
     //原始数据数组
     private int[] data_Array_Origin = null;
@@ -35,7 +44,7 @@ public class Chart{
     }
 
     //默认的生成数组的长度
-    private final int DEFAULT_DATA_GENERATE_LENGTH = 1000;
+    private final int DEFAULT_DATA_GENERATE_LENGTH = WINDOW_WIDTH;
     //生成数组
     private int[] data_Array_Generate = new int[DEFAULT_DATA_GENERATE_LENGTH];
 
@@ -67,9 +76,11 @@ public class Chart{
         return generate_Index_Start_Paint;
     }
     public void set_Generate_Index_Start_Paint(int generate_Index_Start_Paint) {
-        //仅当向左移动 或 右移未超出生成数组显示范围时 允许重设生成数组显示起始点
-        if(generate_Index_Start_Paint + WINDOW_WIDTH/space_Between_Points <= data_Array_Origin.length ||
-                (generate_Index_Start_Paint < this.generate_Index_Start_Paint)){
+        //仅当绘制起始点未越出生成数组 且 向左移动或右移未超出生成数组显示范围时 允许重设生成数组显示起始点
+        if((generate_Index_Start_Paint < data_Array_Generate.length) &&(
+                generate_Index_Start_Paint + WINDOW_WIDTH/space_Between_Points <= data_Array_Origin.length ||
+                generate_Index_Start_Paint < this.generate_Index_Start_Paint
+            )){
             this.generate_Index_Start_Paint = generate_Index_Start_Paint;
         }else {
             logger.log(Level.WARNING,"超出原始数组范围，不移动显示起始点");
@@ -78,28 +89,38 @@ public class Chart{
 
 
     /************************显示设置*************************/
-    //窗口宽度
-    private int WINDOW_WIDTH = 0;{
-        try {
-            WINDOW_WIDTH = Integer.parseInt(Property_Manager.read_Property("WINDOW_WIDTH"));
-        } catch (IOException e) {
-            logger.log(Level.SEVERE,"配置文件加载出错",e);
-        }
-    }
 
     //显示数据点的横向间距
-    private int space_Between_Points = 3;
+    private int space_Between_Points = 3;{
+        try {
+            space_Between_Points = Integer.parseInt(Property_Manager.read_Property("SPACE_BETWEEN_POINTS"));
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"配置文件读取失败");
+        }
+    }
     private final int MAX_SPACE_BETWEEN_POINTS = 10;
+    private final int MIN_SPACE_BETWEEN_POINTS = 0;
     public int get_Space_Between_Points() {
         return space_Between_Points;
     }
     public void set_Space_Between_Points(int space_Between_Points) {
-        if(space_Between_Points > 0 && space_Between_Points <= MAX_SPACE_BETWEEN_POINTS ){
+        if(space_Between_Points > MIN_SPACE_BETWEEN_POINTS &&
+                space_Between_Points <= MAX_SPACE_BETWEEN_POINTS ){
 
             this.space_Between_Points = space_Between_Points;
         }
-        else{
-            logger.log(Level.WARNING,"间距修改失败:超出间距范围");
+    }
+
+    //显示数据点的纵向压缩比
+    private int space_Y = 3;
+    private final int MIN_SPACE_Y = 1;
+    private final int MAX_SPACE_Y = 20;
+    public int get_Space_Y() {
+        return space_Y;
+    }
+    public void set_Space_Y(int space_Y) {
+        if(space_Y >= MIN_SPACE_Y && space_Y <= MAX_SPACE_Y){
+            this.space_Y = space_Y;
         }
     }
 
@@ -195,7 +216,7 @@ public class Chart{
             logger.log(Level.INFO,"仅移动显示区间");
 
             //计算绘制数组
-            form_Data_Array_Print();
+            form_Empty_Data_Array_Print();
 
             for(int i = 0; i < data_Print.length; i++){
                 data_Print[i] = data_Array_Generate[i + generate_Index_Start_Paint];
@@ -210,7 +231,7 @@ public class Chart{
             form_Data_Array_Generate();
 
             //计算绘制数组
-            form_Data_Array_Print();
+            form_Empty_Data_Array_Print();
 
             for(int i = 0; i < data_Print.length; i++){
                 data_Print[i] = data_Array_Generate[i];
@@ -248,12 +269,19 @@ public class Chart{
 
     }
 
-    private void form_Data_Array_Print(){
+    private void form_Empty_Data_Array_Print(){
         //计算显示数据的长度
         int print_Data_Length = 0;
         if( data_Array_Generate.length - generate_Index_Start_Paint < WINDOW_WIDTH/space_Between_Points){
             //若可显示的生成数组短于窗口宽度允许显示的范围
-            print_Data_Length = data_Array_Generate.length - generate_Index_Start_Paint;
+            if(generate_Index_Start_Paint >= 0){
+                //右移的情况
+                print_Data_Length = data_Array_Generate.length - generate_Index_Start_Paint;
+            }
+            else {
+                //左移的情况
+                print_Data_Length = data_Array_Generate.length;
+            }
         }
         else{
             //若可显示的生成数组不短于窗口宽度允许显示的范围
@@ -262,6 +290,5 @@ public class Chart{
         //显示数据的数组
         data_Print = new int[print_Data_Length];
     }
-
 
 }

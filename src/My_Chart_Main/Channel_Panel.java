@@ -22,7 +22,7 @@ public class Channel_Panel extends JPanel{
     }
 
     //通道标签
-    private JLabel channel_Label = new JLabel("通道"+channel_ID+":");
+    private JLabel channel_Label = null;
 
     //图表面板
     private Chart_Panel chart_Panel = null;
@@ -32,7 +32,7 @@ public class Channel_Panel extends JPanel{
         }
         this.chart_Panel = chart_Panel;
         this.add(this.chart_Panel, BorderLayout.CENTER);
-        this.repaint();
+
     }
     public Chart_Panel get_Chart_Panel() {
         return chart_Panel;
@@ -45,6 +45,8 @@ public class Channel_Panel extends JPanel{
         this.channel_ID = channel_ID;
         this.setLayout(new BorderLayout(2,2));
         //添加标签
+        channel_Label = new JLabel();
+        add_Label_Name("");
         this.add(channel_Label, BorderLayout.NORTH);
 
         logger.log(Level.INFO,"通道面板已构造");
@@ -55,16 +57,28 @@ public class Channel_Panel extends JPanel{
      * @param text 添加的串
      */
     public void add_Label_Name(String text){
-        channel_Label.setText(channel_Label.getText()+text);
+        channel_Label.setText("通道"+(channel_ID+1)+":"+text);
     }
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        //绘制图表
-        if(this.chart_Panel != null){
-            this.chart_Panel.paint(g);
-        }
+    /**
+     * 更新图表面板并重绘
+     * @param chart_Panel
+     */
+    public void renew_Chart_Panel_And_Repaint(Chart_Panel chart_Panel){
+        set_Chart_Panel(chart_Panel);
+        revalidate();
+        repaint();
     }
+
+//    @Override
+//    public void paint(Graphics g) {
+//        super.paint(g);
+//        channel_Label.paint(g);
+//        g.setClip(0,0+this.channel_Label.getHeight(), getWidth(), getHeight());
+//        //绘制图表
+//        if(this.chart_Panel != null){
+//            this.chart_Panel.paint(g);
+//        }
+//    }
 
 }

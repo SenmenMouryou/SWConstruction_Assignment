@@ -87,9 +87,9 @@ public class Main_Window extends JFrame {
         logger.log(Level.INFO,"通道面板已添加至窗口");
 
         //添加监听器
-        Listener listner = new Listener();
-        this.addKeyListener(listner);
-        this.addMouseWheelListener(listner);
+        Listener listener = new Listener();
+        this.addKeyListener(listener);
+        this.addMouseWheelListener(listener);
 
         logger.log(Level.INFO,"窗口已初始化");
     }
@@ -241,7 +241,8 @@ public class Main_Window extends JFrame {
     private class Listener implements KeyListener, MouseWheelListener{
 
         private boolean key_Ctrl_Pressed = false;
-        private boolean key_Space_Pressed = true;
+        private boolean key_Space_Pressed = false;
+        private boolean key_Shift_Pressed = false;
 
         /**
          * 鼠标滚轮事件:平移图表
@@ -262,9 +263,8 @@ public class Main_Window extends JFrame {
             }
             //更新图表面板
             chart.set_Generate_Index_Start_Paint(chart.get_Generate_Index_Start_Paint() + delta);
-            channel_Panel.set_Chart_Panel(chart.repaint_Chart());
-            channel_Panel.repaint();
-            channel_Panel.getParent().repaint();
+            channel_Panel.renew_Chart_Panel_And_Repaint(chart.repaint_Chart());
+
             logger.log(Level.INFO,"图表面板已更新");
         }
 
@@ -280,10 +280,26 @@ public class Main_Window extends JFrame {
             Chart chart = channel_Panel.get_Chart_Panel().get_Chart();
             //更新图表面板
             chart.set_Space_Between_Points(chart.get_Space_Between_Points() + delta);
-            channel_Panel.set_Chart_Panel(chart.repaint_Chart());
-            channel_Panel.repaint();
-            channel_Panel.getParent().repaint();
+            channel_Panel.renew_Chart_Panel_And_Repaint(chart.repaint_Chart());
 
+            logger.log(Level.INFO,"图表面板已更新");
+        }
+
+        /**
+         * 按住Alt时鼠标滚轮事件：纵向向拉伸/缩小图表
+         * @param channel_Panel 执行事件的通道面板
+         * @param e             滚轮事件
+         */
+        private void channel_Mouse_Wheel_Event_Shift(Channel_Panel channel_Panel, MouseWheelEvent e){
+            //滚轮上滚/下滚的变化值
+            int delta = e.getWheelRotation();
+            //取得图表类
+            Chart chart = channel_Panel.get_Chart_Panel().get_Chart();
+            //更新图表面板
+            chart.set_Space_Y(chart.get_Space_Y() + delta);
+            channel_Panel.renew_Chart_Panel_And_Repaint(chart.repaint_Chart());
+
+            System.out.print(":"+chart.get_Space_Y());
             logger.log(Level.INFO,"图表面板已更新");
         }
 
@@ -302,6 +318,12 @@ public class Main_Window extends JFrame {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 key_Space_Pressed = true;
             }
+
+            if(e.getKeyCode()==KeyEvent.VK_SHIFT){
+                key_Shift_Pressed = true;
+                System.out.println(true);
+            }
+
         }
 
         @Override
@@ -314,21 +336,34 @@ public class Main_Window extends JFrame {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 key_Space_Pressed = false;
             }
+
+            if(e.getKeyCode()==KeyEvent.VK_SHIFT){
+                key_Shift_Pressed = false;
+                System.out.println(false);
+            }
+
         }
 
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {
-            if(!key_Ctrl_Pressed) {
+            if(key_Ctrl_Pressed) {
                 for (int i = 0; i < channel_Panel_Array.length; i++) {
                     if (channel_Panel_Array[i].get_Chart_Panel() != null) {
-                        channel_Mouse_Wheel_Event(channel_Panel_Array[i], e);
+                        channel_Mouse_Wheel_Event_Ctrl(channel_Panel_Array[i], e);
+                    }
+                }
+            }
+            else if(key_Shift_Pressed){
+                for (int i = 0; i < channel_Panel_Array.length; i++) {
+                    if (channel_Panel_Array[i].get_Chart_Panel() != null) {
+                        channel_Mouse_Wheel_Event_Shift(channel_Panel_Array[i], e);
                     }
                 }
             }
             else {
                 for (int i = 0; i < channel_Panel_Array.length; i++) {
                     if (channel_Panel_Array[i].get_Chart_Panel() != null) {
-                        channel_Mouse_Wheel_Event_Ctrl(channel_Panel_Array[i], e);
+                        channel_Mouse_Wheel_Event(channel_Panel_Array[i], e);
                     }
                 }
             }

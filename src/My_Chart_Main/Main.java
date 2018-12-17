@@ -26,9 +26,9 @@ public class Main {
     }
 
     private static void test_IO(){
-        int FILE_LENGTH = 100;
+        int FILE_LENGTH = 2000;
 
-        String filename = "Test/file_Reader_Test_Main_100.bin";
+        String filename = "Test/Test_Data_Random_2000.bin";
 
         try {
             OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filename));
@@ -36,7 +36,8 @@ public class Main {
             logger.log(Level.INFO,"文件开始写入");
 
             for(int i = 0; i < FILE_LENGTH; i++){
-                byte byte_To_Write = (byte)i;
+                byte byte_To_Write = (byte)(Math.random()*(Byte.MAX_VALUE-Byte.MIN_VALUE));
+                System.out.print(byte_To_Write+" ");
                 outputStream.write(byte_To_Write);
             }
 
